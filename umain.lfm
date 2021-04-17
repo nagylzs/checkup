@@ -5,7 +5,98 @@ object frmMain: TfrmMain
   Width = 887
   BorderIcons = [biSystemMenu]
   Caption = 'CheckUp'
+  ClientHeight = 290
+  ClientWidth = 887
   DesignTimePPI = 120
   OnCreate = FormCreate
   LCLVersion = '2.0.12.0'
+  object ProgressBar: TProgressBar
+    Left = 0
+    Height = 16
+    Top = 274
+    Width = 887
+    Align = alBottom
+    TabOrder = 0
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 233
+    Width = 887
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 887
+    TabOrder = 1
+    object btnRun: TBitBtn
+      Left = 32
+      Height = 37
+      Top = 1
+      Width = 193
+      Caption = 'Futtat...'
+      Enabled = False
+      OnClick = btnRunClick
+      TabOrder = 0
+    end
+    object btnAbort: TBitBtn
+      Left = 392
+      Height = 37
+      Top = 1
+      Width = 193
+      Caption = 'Megszakít'
+      OnClick = btnAbortClick
+      TabOrder = 1
+    end
+  end
+  object m: TMemo
+    Left = 0
+    Height = 233
+    Top = 0
+    Width = 887
+    Align = alClient
+    Font.CharSet = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Fixedsys'
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 2
+  end
+  object http: TIdHTTP
+    IOHandler = iohandler
+    OnWork = httpWork
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 292
+    Top = 57
+  end
+  object timer: TTimer
+    Interval = 100
+    OnTimer = timerTimer
+    Left = 232
+    Top = 64
+  end
+  object iohandler: TIdSSLIOHandlerSocketOpenSSL
+    MaxLineAction = maException
+    Port = 0
+    DefaultPort = 0
+    SSLOptions.Method = sslvTLSv1_2
+    SSLOptions.SSLVersions = [sslvTLSv1_2]
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 352
+    Top = 66
+  end
 end

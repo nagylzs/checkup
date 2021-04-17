@@ -1,0 +1,185 @@
+object frmHelp: TfrmHelp
+  Left = 526
+  Height = 698
+  Top = 180
+  Width = 965
+  ClientHeight = 698
+  ClientWidth = 965
+  DesignTimePPI = 120
+  OnClose = FormClose
+  LCLVersion = '2.0.12.0'
+  object memo: TMemo
+    Left = 0
+    Height = 673
+    Top = 0
+    Width = 965
+    Align = alClient
+    Font.CharSet = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Fixedsys'
+    Lines.Strings = (
+      ';'
+      '; A CheckUp.exe egy egyszerű program frissítésre használható program,'
+      '; ami HTTP vagy HTTPS kapcsolaton keresztül elérhető könyvtár listák'
+      '; alapján frissíti a helyi program verziót.'
+      ';'
+      '; A program indításához meg lehet adni egy paramétert, ami egy ini'
+      '; állomány elérési útja. Ha ez nincs megadva, akkor a checkup.ini'
+      '; illetve az autoupdate.ini állományokat próbálja meg betölteni.'
+      '; Ha ezt sem sikerül, akkor hibát ír ki.'
+      ';'
+      '; Ez a leírás egy példa konfigurációs állomány. Mentsd le a tartalmát'
+      '; egy checkup.ini állományba, és használd mintaként.'
+      ';'
+      ';'
+      '; A CheckUp.exe -t úgy tudod frissíteni, hogy egy CheckUp_New.exe -t'
+      '; küldesz el frissítésként. Az a KONVENCIÓ, hogy az AfterUpdate -ben'
+      '; elindított program észreveszi hogy van egy CheckUp_new.exe; ezt'
+      '; átnevezi CheckUp.exe -re és újra futtatja. Egy későbbi verzióban'
+      '; majd lehet, hogy a CheckUp.exe saját magától, külső segítség nélkül'
+      '; is meg fogja tudni ezt tenni (de egyelőre nem tudja).'
+      ';'
+      ''
+      ''
+      ';'
+      '; A Server szekció azonosítja a szerver domain nevét, a portszámot'
+      '; és a protokolt.'
+      ';'
+      '[Server]'
+      '; http vagy https'
+      'Proto=http'
+      'Host=update.visznet'
+      'Port=8080'
+      ''
+      '; Ha nincs proxy, akkor hagyd ezeket üresen (vagy hagyd ki az egész'
+      '; szekciót).'
+      '[Proxy]'
+      'Host='
+      'Port='
+      'User='
+      'Password='
+      ''
+      ';'
+      '; A Resource szekció mondja meg, hogy a szerveren milyen verziók'
+      '; érhetők el, illetve hogy mi a helyi letöltött utolsó verzió.'
+      ';'
+      '[Resource]'
+      '; Erről a relatív URL-ről tölti le a verziók listáját.'
+      '; Ez az URL egy HTML lapot kell hogy adjon, amiben linkek vannak.'
+      '; (File listing) Minden verzió egy könyvtár, és a linkben a neve'
+      '; / jellel kell hogy végződjön. Aminek a végén nincs / jel, azt'
+      '; figyelmen kívül hagyja (sima file). Minden verzió egy könyvtár kell'
+      '; hogy legyen! Ez az érték / jellel kellene hogy végződjön. Ha nem adod'
+      '; meg a végére a / jelet, akkor a program magától hozzáteszi.'
+      'Name=/program/'
+      '; Ha a VersionPath meg van adva, akkor az aktuális legújabb verzió neve'
+      '; az itt megadott relatív útból van meghatározva: ez az URL egy szöveget'
+      '; kell hogy visszaadjon, és ennek az első sorát nézi. Ha a Version_URL'
+      '; meg van adva, akkor a program az így letöltött szöveget összehasonlítja'
+      '; az előző futtatáskor letöltött szöveggel. Ha a kettő egyezik, akkor'
+      '; meg se próbál frissíteni (és nem tölti le a verziók listáját se!).'
+      '; Ha a VersionURL nincs megadva, akkor az aktuális legújabb verzió '
+      '; neve a könyvtár listában a legnagyobb (névsorrendben utolsó) könyvtár '
+      '; neve lesz. Ennek meghatározásához le kell tölteni a könyvtár listát, '
+      '; ami hosszú is lehet.'
+      'VersionPath=/program/version.txt'
+      '; A legutoljára letöltött verzió neve. Ez mindig / jellel'
+      '; végződik. A CheckUp.exe minden frissítés után visszaírja az ini'
+      '; file-ba. Így lehet tudni, hogy mi az utolsó letöltött verzió könyvtár'
+      '; neve.'
+      'LastVersionDir=2016_05_25_16_38_07/'
+      '; A legutoljára letöltött verzió neve. Ha nincs megadva a VersionURL,'
+      '; akkor ez mindig ugyan az lesz, mint a LastVersionDir. Ha van megadva'
+      '; VersionURL, akkor ez az utolsó sikeres frissítéskor használt verzió'
+      '; érték lesz. Amikor a CheckUp.exe elindul, akkor ezt a LastVersion'
+      '; értéket hasonlítja össze az aktuális legújabb verzióval. Ha a kettő'
+      '; nem egyezik meg, akkor frissít. Ha ezek eltérnek, akkor nem frissít.'
+      '; Fontos dolog, hogy a LastVersion csak annak meghatározására való, hogy'
+      '; elkezdje-e a frissítést. De azt nem mondja meg, hogy a frissítés során'
+      '; mit töltsön le! A letöltésnél MINDIG a névsorrendben legutolsó'
+      '; könyvtárat tölti le. Ezen felül az is fontos dolog, hogy ha a'
+      '; LastVersion és az aktuális verzió eltér, akkor le fogja tölteni'
+      '; a legutolsó verzió könyvtárat. Akkor is, ha az már korábban egyszer'
+      '; le lett töltve (egy másik version értékkel)'
+      'LastVersion=2016_05_25_16_38_07/'
+      ''
+      ';'
+      '; A Destination szekció mondja meg azt, hogy hová és hogyan kell'
+      '; letölteni a legújabb verziót.'
+      ';'
+      '[Destination]'
+      '; Első lépésben ide tölti le az állományokat. Ha ez nincs megadva, akkor'
+      '; a ''Download'' nevűbe. Ezen belül a verzió könyvtára IS benne lesz.'
+      '; Tehát ha pl. a verzió neve ''2016_05_25_16_38_07/'' és'
+      '; DownloadDir=DL akkor a DL/2016_05_25_16_38_07/ alá tölti le őket.'
+      'DownloadDir='
+      '; Letöltés után ide másolja be az állományokat. Tehát csak akkor másolja'
+      '; be őket, ha az összeset sikerült letölteni. Ha a letöltéskor hiba van,'
+      '; akkor nem másol be SEMMIT.'
+      'InstallDir='
+      '; Ez egy egész szám kell hogy legyen. Ha az értéke nem nulla, akkor'
+      '; az InstallDir -be nem a verzió könyvtár tartalmát másolja be, hanem'
+      '; magát a verzió könyvtárat.'
+      'Replicate=0'
+      '; Ha itt meg van adva egy file, akkor letöltés előtt ellenőrzi, hogy'
+      '; írható-e. Ha nem írható (mert pl. ez egy futó program), akkor nem'
+      '; frissít, hanem kiír egy hibaüzenetet arról, hogy mivel a file nem'
+      '; módosítható, ezért a frissítés nem végezhető el.'
+      'CheckWritable=mastERPiece.exe'
+      ''
+      ';'
+      '; Az AfterUpdate szekció azt mondja meg, hogy mi történjen a frissítés'
+      '; után. Ez akkor is lefut, ha nem volt új letölthető verzió.'
+      ';'
+      ';'
+      '[AfterUpdate]'
+      '; Sikeres update után ezt futtatja le. Ez mindig a CheckUp.exe -hez'
+      '; képest relatív!'
+      'Run=mastERPiece.exe'
+      '; ...ezekkel a paraméterekkel.'
+      'Params=--updated --create-desktop-icon'
+      ''
+      ''
+      ';'
+      '; További szekciókat adhatsz hozzá, növekvő sorszámozással, úgy hogy'
+      '; 2-től indul kihagyás nélkül. A Server2 és Proxy2 szekciók megadása'
+      '; nem kötelező, azt örökli a Server és Proxy -tól. Az AfterUpdate-et'
+      '; nem örökli, de ha nincs megadva akkor ott nem csinál semmit (nem'
+      '; indít el semmit). A Resource2 és Destination2 viszont kell hogy'
+      '; legyen. Ha nincsenek, akkor ott megszakad a frissítés.'
+      ';'
+      ';'
+      ';[Server2]'
+      ';[Proxy2]'
+      ';[Resource2]'
+      ';[Destination2]'
+      ';[AfterUpdate2]'
+      ';'
+      ';[Server3]'
+      ';[Proxy3]'
+      ';[Resource3]'
+      ';[Destination3]'
+      ';[AfterUpdate3]'
+      ';'
+      '; Stb.'
+      ';'
+      ''
+    )
+    OnChange = memoChange
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 0
+  end
+  object btnClose: TBitBtn
+    Left = 0
+    Height = 25
+    Top = 673
+    Width = 965
+    Align = alBottom
+    Caption = 'Bezár'
+    Kind = bkClose
+    TabOrder = 1
+  end
+end
