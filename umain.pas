@@ -240,13 +240,6 @@ begin
   end;
 end;
 
-(*
-function TfrmMain.GetHeaderFileName:string;
-begin
-    Result := GetExedir + 'HEADER';
-end;
-*)
-
 function TfrmMain.GetBodyFileName: string;
 begin
   Result := GetExedir + 'BODY';
@@ -284,12 +277,19 @@ begin
         // For https, openssl dlls are needed.
         // http://www.indyproject.org/sockets/ssl.en.aspx
         url := FProto + '://' + FHost + ':' + IntToStr(FPort) + RelUrl;
+        Log('    GET ' + url);
         http.Get(url, resp);
         Application.ProcessMessages;
         break;
       except
+        on E: EIdHTTPProtocolException do
+        begin
+          Log('HTTP ' + IntToStr(e.ErrorCode)+': '+e.Message);
+          raise;
+        end;
         on E: Exception do
         begin
+          Log('HIBA('+IntToStr(cnt)+') - hamarosan újra próbálom');
           if cnt > 20 then
             raise;
           sleep(300);
@@ -302,28 +302,6 @@ begin
     resp.Free;
   end;
 end;
-
-(*
-function TfrmMain.GetContentType:string;
-const
-  TERM = 'Content-type:';
-var
-  s : string;
-  index : integer;
-begin
-  s := File2String(GetHeaderFileName);
-  index := Pos(TERM,s);
-  if index <= 0
-    then Result := 'text/plain'
-  else begin
-    Result := Copy(s,index + Length(TERM),Length(s));
-    index := Pos(#13,Result);
-    if index > 0 then
-      Result := Copy(Result,1,index);
-    Result := Trim(Result);
-  end;
-end;
-*)
 
 function TfrmMain.Body2FileList(const ARelUrl: string; const ALogPrefix: string;
   const APostfix: string): TStringList;

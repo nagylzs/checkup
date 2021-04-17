@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, uMain, streamdownloader,
+  Forms, uMain,
   lazcontrols, indylaz, ufunctions, uHelp
   { you can add units after this };
 
