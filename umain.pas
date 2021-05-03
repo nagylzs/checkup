@@ -137,7 +137,7 @@ begin
   flogfilepath := GetExedir + 'CheckUp.log';
   if FileExists(flogfilepath) then
   begin
-    FLogFile := TFileStream.Create(flogfilepath, fmOpenWrite);
+    FLogFile := TFileStream.Create(flogfilepath, fmOpenWrite or fmShareDenyWrite);
     FLogFile.Seek(0, soEnd);
   end
   else
