@@ -545,8 +545,6 @@ begin
 end;
 
 procedure TfrmMain.DoRun;
-var
-  output: string;
 begin
   if FRun <> '' then
     ShellExecute(
