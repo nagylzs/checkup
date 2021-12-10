@@ -289,6 +289,7 @@ begin
         end;
         on E: Exception do
         begin
+          Log(e.Message);
           Log('HIBA('+IntToStr(cnt)+') - hamarosan újra próbálom');
           if cnt > 20 then
             raise;

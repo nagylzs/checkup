@@ -1,62 +1,66 @@
 object frmMain: TfrmMain
   Left = 412
-  Height = 290
+  Height = 348
   Top = 383
-  Width = 887
+  Width = 1064
   BorderIcons = [biSystemMenu]
   Caption = 'CheckUp'
-  ClientHeight = 290
-  ClientWidth = 887
-  DesignTimePPI = 120
+  ClientHeight = 348
+  ClientWidth = 1064
+  DesignTimePPI = 144
   OnCreate = FormCreate
   LCLVersion = '2.0.12.0'
   object ProgressBar: TProgressBar
     Left = 0
-    Height = 16
-    Top = 274
-    Width = 887
+    Height = 19
+    Top = 329
+    Width = 1064
     Align = alBottom
+    ParentFont = False
     TabOrder = 0
   end
   object pnlBottom: TPanel
     Left = 0
-    Height = 41
-    Top = 233
-    Width = 887
+    Height = 49
+    Top = 280
+    Width = 1064
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 41
-    ClientWidth = 887
+    ClientHeight = 49
+    ClientWidth = 1064
+    ParentFont = False
     TabOrder = 1
     object btnRun: TBitBtn
-      Left = 32
-      Height = 37
+      Left = 38
+      Height = 44
       Top = 1
-      Width = 193
+      Width = 232
       Caption = 'Futtat...'
       Enabled = False
       OnClick = btnRunClick
+      ParentFont = False
       TabOrder = 0
     end
     object btnAbort: TBitBtn
-      Left = 392
-      Height = 37
+      Left = 470
+      Height = 44
       Top = 1
-      Width = 193
+      Width = 232
       Caption = 'Megszakít'
       OnClick = btnAbortClick
+      ParentFont = False
       TabOrder = 1
     end
   end
   object m: TMemo
     Left = 0
-    Height = 233
+    Height = 280
     Top = 0
-    Width = 887
+    Width = 1064
     Align = alClient
     Font.CharSet = EASTEUROPE_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -13
     Font.Name = 'Fixedsys'
     ParentFont = False
     ReadOnly = True
@@ -78,14 +82,14 @@ object frmMain: TfrmMain
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 292
-    Top = 57
+    Left = 350
+    Top = 68
   end
   object timer: TTimer
     Interval = 100
     OnTimer = timerTimer
-    Left = 232
-    Top = 64
+    Left = 278
+    Top = 77
   end
   object iohandler: TIdSSLIOHandlerSocketOpenSSL
     MaxLineAction = maException
@@ -96,7 +100,7 @@ object frmMain: TfrmMain
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
-    Left = 352
-    Top = 66
+    Left = 422
+    Top = 79
   end
 end
